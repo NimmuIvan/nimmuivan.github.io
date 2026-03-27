@@ -1,316 +1,87 @@
+Portfolio Website Code
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Nimmu Ivan — Portfolio</title>
-  <meta name="description" content="Portfolio — About, Work, Education, Certifications, Projects, Contact" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
-    :root{
-      --bg:#0b0f1a;           /* page background */
-      --surface:#101727;      /* card background */
-      --muted:#9aa4b2;        /* secondary text */
-      --text:#e6edf3;         /* primary text */
-      --brand:#7c9cff;        /* brand accent */
-      --brand-2:#5373ff;      /* brand shade */
-      --ok:#34d399;           /* success */
-      --ring: 0 0 0 3px rgba(124,156,255,.25);
-      --radius: 16px;
-      --shadow: 0 10px 30px rgba(0,0,0,.25);
-      --grid: 1200px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;height:auto;border-radius:12px}
-
-    /* Top nav */
-    .nav{position:sticky;top:0;z-index:50;background:rgba(16,23,39,.7);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid rgba(124,156,255,.08)}
-    .nav-inner{max-width:var(--grid);margin:0 auto;display:flex;align-items:center;gap:12px;justify-content:space-between;padding:14px 20px}
-    .brand{font-weight:800;letter-spacing:.4px}
-    .brand .dot{color:var(--brand)}
-    .links{display:flex;flex-wrap:wrap;gap:8px}
-    .link{padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:600;font-size:.95rem}
-    .link:hover{color:var(--text);background:rgba(124,156,255,.08)}
-    .link.active{color:var(--text);background:linear-gradient(90deg,var(--brand),var(--brand-2))}
-
-    /* Hero */
-    .hero{max-width:var(--grid);margin:0 auto;padding:56px 20px 24px;display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center}
-    .badge{display:inline-flex;gap:8px;align-items:center;background:rgba(124,156,255,.12);border:1px solid rgba(124,156,255,.2);padding:6px 10px;border-radius:999px;color:#cdd6f4;font-weight:600;font-size:.85rem}
-    .title{font-size:clamp(28px,4vw,40px);line-height:1.2;margin:16px 0 8px;font-weight:800}
-    .subtitle{color:var(--muted);font-weight:600}
-    .pillrow{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 26px}
-    .pill{font-size:.9rem;background:#0d1324;border:1px solid rgba(124,156,255,.15);padding:8px 12px;border-radius:999px;color:#c9d3ff}
-    .cta{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;border-radius:12px;padding:12px 16px;border:1px solid rgba(124,156,255,.2);background:#0e1426}
-    .btn.primary{background:linear-gradient(90deg,var(--brand),var(--brand-2));border:none;box-shadow:var(--shadow)}
-    .btn:focus{outline:none;box-shadow:var(--ring)}
-
-    /* Sections */
-    section{scroll-margin-top:80px}
-    .wrap{max-width:var(--grid);margin:0 auto;padding:48px 20px}
-    .section-title{font-size:1.6rem;font-weight:800;margin-bottom:18px}
-    .muted{color:var(--muted)}
-
-    /* Cards & grids */
+    body{margin:0;font-family:Inter;background:#0b0f1a;color:#e6edf3}
+    .nav{position:sticky;top:0;background:#101727;padding:12px}
+    .nav a{margin-right:10px;color:#9aa4b2;text-decoration:none}
+    .nav a:hover{color:#fff}
+    .wrap{max-width:1100px;margin:auto;padding:40px}
     .grid{display:grid;gap:16px}
-    @media(min-width:860px){.grid.cols-2{grid-template-columns:repeat(2,1fr)}.grid.cols-3{grid-template-columns:repeat(3,1fr)}}
-    .card{background:var(--surface);border:1px solid rgba(124,156,255,.08);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
-    .card h3{margin:4px 0 6px;font-size:1.05rem}
-    .kicker{font-weight:700;color:#c9d3ff;letter-spacing:.3px}
-    .meta{font-size:.9rem;color:var(--muted)}
-
-    /* Timeline style */
-    .timeline{position:relative}
-    .timeline:before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(var(--brand),transparent)}
-    .tl{position:relative;padding-left:28px;margin:0 0 14px}
-    .dot{position:absolute;left:4px;top:6px;width:12px;height:12px;border-radius:999px;background:var(--brand)}
-
-    /* Footer/contact */
-    .contact-card .row{display:grid;gap:12px}
-    @media(min-width:720px){.contact-card .row{grid-template-columns:1fr 1fr}}
-    input,textarea{width:100%;background:#0d1324;color:var(--text);border:1px solid rgba(124,156,255,.2);border-radius:12px;padding:12px;font:inherit}
-    textarea{min-height:120px;resize:vertical}
-    input::placeholder,textarea::placeholder{color:#7f8aad}
-    .note{font-size:.9rem;color:var(--muted)}
-
-    /* Utilities */
-    .spacer{height:18px}
-    .center{display:flex;align-items:center;justify-content:center}
-    .right{margin-left:auto}
-    .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.25);color:#baf7dc;font-weight:700}
-
-    /* Active section animation */
-    .reveal{opacity:0;transform:translateY(16px);transition:all .6s ease}
-    .reveal.show{opacity:1;transform:none}
+    @media(min-width:860px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .card{background:#101727;padding:16px;border-radius:12px}
+    h2{margin-bottom:20px}
+    .btn{display:inline-block;margin-top:10px;padding:8px 12px;background:#5373ff;color:#fff;border-radius:8px}
   </style>
 </head>
+
 <body>
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <a class="brand" href="#top">nimmuivan<span class="dot">.</span>github.io</a>
-      <div class="links" id="navLinks">
-        <a class="link" href="#about">About</a>
-        <a class="link" href="#work">Work</a>
-        <a class="link" href="#education">Education</a>
-        <a class="link" href="#certifications">Certifications</a>
-        <a class="link" href="#projects">Projects</a>
-        <a class="link" href="#contact">Contact</a>
-      </div>
-    </div>
-  </nav>
 
-  <!-- HERO / ABOUT -->
-  <header class="hero" id="top">
-    <div>
-      <span class="badge">About Me</span>
-      <h1 class="title">Data Analyst & Analytics Engineer</h1>
-      <p class="title">Forecasting | Optimization | Scalable BI Systems</p>
-      <p class="subtitle">Data Analyst & Analytics Engineer with 8+ years across consulting and reporting. I build forecasting models, optimization tools, and self‑serve BI systems with Python, SQL, DAX, and Databricks. I love automated reporting pipelines, statistical anomaly detection, and Git‑based CI/CD.</p>
-      <div class="pillrow">
-        <span class="pill">Python</span>
-        <span class="pill">SQL</span>
-        <span class="pill">Power BI / DAX</span>
-        <span class="pill">Snowflake</span>
-        <span class="pill">Databricks</span>
-      </div>
-      <div class="cta">
-        <a class="btn primary" href="#contact">Contact</a>
-        <a class="btn" href="#portfolio">See Projects</a>
-      </div>
-    </div>
-    <div class="center">
-      <img src="assests/profile.jpeg" alt="Profile" loading="lazy" style="max-width:260px;aspect-ratio:1/1;object-fit:cover;border:1px solid rgba(124,156,255,.2)">
-    </div>
-  </header>
-
-  <!-- ABOUT SECTION (detailed) -->
-  <section id="about" class="wrap reveal">
-    <h2 class="section-title">About Me</h2>
-    <p class="muted">I design analytics that actually get used. My sweet spot is stitching together clean data models, fast visuals, and operational guardrails so teams can trust the numbers without babysitting them. Lately I’ve been focused on forecasting accuracy and pipeline reliability, with an emphasis on governance and accessibility.</p>
-  </section>
-
-  <!-- WORK -->
-  <section id="work" class="wrap reveal">
-    <h2 class="section-title">Work History</h2>
-    <div class="timeline">
-      <article class="tl card">
-        <div class="dot"></div>
-        <div class="kicker">Business Intelligence & Planning · Metro Trains Melbourne</div>
-        <h3>Analytics Engineer / Data Analyst</h3>
-        <div class="meta">2024 — Present · Melbourne</div>
-        <p>Built flagship Power BI KPIs with hourly refresh, migrated legacy Excel/SharePoint reporting, and automated month‑end packs. Led fill‑rate analysis that improved scheduling efficiency and trainer utilisation.</p>
-      </article>
-      <article class="tl card">
-        <div class="dot"></div>
-        <div class="kicker">Capgemini</div>
-        <h3>Data Analyst</h3>
-        <div class="meta">2021 — 2024</div>
-        <p>Delivered forecasting models, anomaly detection, and self‑serve dashboards. Standardised pipelines, DQ checks, and versioned transformations.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- EDUCATION -->
-  <section id="education" class="wrap reveal">
-    <h2 class="section-title">Education</h2>
-    <div class="grid cols-2">
-      <div class="card">
-        <h3>Master of Computer Science (in progress)</h3>
-        <div class="meta">2024 — Present</div>
-        <p class="muted">Focus on data engineering, algorithms, and applied ML.</p>
-      </div>
-      <div class="card">
-        <h3>Bachelor (relevant field)</h3>
-        <div class="meta">Year — Year</div>
-        <p class="muted">Swap this with your degree details and core subjects.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CERTIFICATIONS -->
- <section id="certifications" class="wrap reveal">
-<h2 class="section-title">Certifications</h2>
-<div class="grid cols-3">
-<div class="card">
-<img src="assests/databricks.png" alt="Databricks" style="max-height:40px;margin-bottom:8px">
-<h3>Databricks Lakehouse Fundamentals</h3>
-<p class="muted">Databricks · 2024</p>
-<p class="muted">Databricks Lakehouse Fundamentals</p>
-<a class="btn" href="https://credentials.databricks.com/27a89e9f-0868-4da3-9a79-07ec06876fb9#acc.JMpqThQK" target="_blank" rel="noopener">View Credential</a>
+<div class="nav">
+  <a href="#about">About</a>
+  <a href="#work">Work</a>
+  <a href="#education">Education</a>
+  <a href="#certifications">Certifications</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
 </div>
-<div class="card">
-<img src="assests/microsoft.png" alt="Microsoft" style="max-height:40px;margin-bottom:8px">
-<h3>Microsoft Certified: Power BI Data Analyst Associate</h3>
-<p class="muted">Microsoft · 2023</p>
-<p class="muted">Credential ID: D6FF6E0F01F552B0</p>
-<a class="btn" href="https://www.credly.com/badges/e7003749-9a2e-4104-9c91-8bebb5f4a0ca" target="_blank" rel="noopener">View Credential</a>
-</div>
-<div class="card">
-  <img src="assests/microsoft.png" alt="Microsoft" style="max-height:40px;margin-bottom:8px">
-  <h3>Microsoft Certified: Azure Fundamentals</h3>
-  <p class="muted">Microsoft · 2023</p>
-  <a class="btn" href="https://learn.microsoft.com/en-au/users/ivannimmu-9344/credentials/1a21b568e22aceb3?ref=https%3A%2F%2Fwww.linkedin.com%2F" target="_blank" rel="noopener">View Credential</a>
-</div>  
-</div>
+
+<section class="wrap">
+  <h1>Data Analyst & Analytics Engineer</h1>
+  <p>Forecasting | Optimization | Scalable BI Systems</p>
+  <a class="btn" href="#projects">See Projects</a>
 </section>
 
-  <!-- PROJECTS -->
-<div class="grid cols-3">
+<section id="about" class="wrap">
+  <h2>About</h2>
+  <p>I build forecasting models, dashboards, and automated data pipelines using Python, SQL, and Power BI.</p>
+</section>
 
-  <!-- Project 1 -->
-  <a class="card" href="https://github.com/NimmuIvan/athlete-eda-analysis" target="_blank">
-    <h3>Athlete Performance Analysis</h3>
-    <p class="muted">
-      Exploratory Data Analysis and hypothesis testing on athlete physiological data. 
-      Used Python, Seaborn, and SciPy to compare endurance vs non-endurance athletes.
-    </p>
-    <p class="muted">
-      Key Result: No statistically significant difference in hemoglobin levels (p > 0.05).
-    </p>
-  </a>
+<section id="work" class="wrap">
+  <h2>Work</h2>
+  <p>Metro Trains Melbourne — Analytics Engineer</p>
+</section>
 
-  <!-- Project 2 -->
-  <a class="card" href="#" target="_blank">
-    <h3>Training Fill Rate Dashboard</h3>
-    <p class="muted">
-      Built Power BI dashboard to track training utilisation, fill rates, and revenue trends.
-    </p>
-    <p class="muted">
-      Impact: Improved scheduling efficiency and visibility for leadership reporting.
-    </p>
-  </a>
+<section id="education" class="wrap">
+  <h2>Education</h2>
+  <p>Master of Computer Science (In Progress)</p>
+</section>
 
-  <!-- Project 3 -->
-  <a class="card" href="#" target="_blank">
-    <h3>Automated Reporting Pipeline</h3>
-    <p class="muted">
-      Designed automated data pipeline using Power BI, SharePoint, and Power Automate.
-    </p>
-    <p class="muted">
-      Reduced manual reporting effort and improved data reliability.
-    </p>
-  </a>
+<section id="certifications" class="wrap">
+  <h2>Certifications</h2>
+  <p>Microsoft Power BI | Azure Fundamentals | Databricks</p>
+</section>
 
-</div>
-  </section>
+<section id="projects" class="wrap">
+  <h2>Projects</h2>
+  <div class="grid">
+    <a class="card" href="https://github.com/NimmuIvan/athlete-eda-analysis" target="_blank">
+      <h3>Athlete Performance Analysis</h3>
+      <p>EDA and hypothesis testing on athlete data.</p>
+      <p>Tools: Python, Pandas, Seaborn, SciPy</p>
+    </a>
+    <a class="card" href="#">
+      <h3>Training Fill Rate Dashboard</h3>
+      <p>Power BI dashboard for training utilisation and revenue tracking.</p>
+    </a>
+    <a class="card" href="#">
+      <h3>Automated Reporting Pipeline</h3>
+      <p>Power Automate + SharePoint pipeline reducing manual work.</p>
+    </a>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="wrap reveal">
-    <h2 class="section-title">Contact</h2>
-    <div class="card contact-card">
-      <div class="row">
-        <div>
-          <form action="mailto:ivannimmu@gmail.com" method="post" enctype="text/plain" onsubmit="alert('This opens your email client. For a real form, wire up a backend or use Formspree.');">
-            <label class="muted" for="name">Name</label>
-            <input id="name" name="name" placeholder="Your name" required>
-            <div class="spacer"></div>
-            <label class="muted" for="email">Email</label>
-            <input id="email" type="email" name="email" placeholder="you@example.com" required>
-            <div class="spacer"></div>
-            <label class="muted" for="msg">Message</label>
-            <textarea id="msg" name="message" placeholder="How can I help?" required></textarea>
-            <div class="spacer"></div>
-            <button class="btn primary" type="submit">Send message</button>
-          </form>
-        </div>
-        <div>
-          <div class="tag" style="margin-bottom:12px">Open to opportunities</div>
-          <p class="muted">Prefer email? Try <a href="mailto:ivannimmu@gmail.com" style="text-decoration:underline">nimmuivan@gmail.com</a>.You can also link your LinkedIn and GitHub below.</p>
-          <div class="spacer"></div>
-          <div class="grid cols-2">
-            <a class="btn" href="https://github.com/nimmuivan" target="_blank" rel="noopener">GitHub</a>
-            <a class="btn" href="https://www.linkedin.com/in/nimmu-ivan/" target="_blank" rel="noopener">LinkedIn</a>
+<section id="contact" class="wrap">
+  <h2>Contact</h2>
+  <p>Email: nimmuivan@gmail.com</p>
+</section>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="wrap center muted">© <span id="year"></span> Nimmu Ivan · Built for GitHub Pages</div>
-
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Reveal on scroll
-    const show = (el)=> el.classList.add('show');
-    const obs = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) show(e.target); });
-    }, {threshold:.15});
-    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-    // Active link highlighting
-    const sections = Array.from(document.querySelectorAll('section, header.hero'));
-    const navLinks = Array.from(document.querySelectorAll('.links .link'));
-    const mapping = {
-      'top':'',
-      'about':'#about',
-      'work':'#work',
-      'education':'#education',
-      'certifications':'#certifications',
-      'portfolio':'#portfolio',
-      'contact':'#contact'
-    };
-    const linkFor = (hash)=> navLinks.find(a=>a.getAttribute('href')===hash);
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(!e.isIntersecting) return;
-        const id = e.target.id || 'top';
-        const hash = id==='top' ? '' : ('#'+id);
-        navLinks.forEach(a=>a.classList.remove('active'));
-        const l = linkFor(hash);
-        if(l) l.classList.add('active');
-      });
-    }, {threshold:.55});
-    sections.forEach(s=>io.observe(s));
-  </script>
 </body>
 </html>

@@ -122,7 +122,7 @@
       </div>
       <div class="cta">
         <a class="btn primary" href="#contact">Contact</a>
-        <a class="btn" href="#portfolio">See Projects</a>
+        <a class="btn" href="#projects">See Projects</a>
       </div>
     </div>
     <div class="center">
@@ -202,7 +202,10 @@
 </section>
 
   <!-- PROJECTS -->
-<div class="grid cols-3">
+<section id="projects" class="wrap reveal">
+  <h2 class="section-title">Projects</h2>
+
+  <div class="grid cols-3">
 
   <!-- Project 1 -->
   <a class="card" href="https://github.com/NimmuIvan/athlete-eda-analysis" target="_blank">
@@ -291,14 +294,14 @@
     const sections = Array.from(document.querySelectorAll('section, header.hero'));
     const navLinks = Array.from(document.querySelectorAll('.links .link'));
     const mapping = {
-      'top':'',
-      'about':'#about',
-      'work':'#work',
-      'education':'#education',
-      'certifications':'#certifications',
-      'portfolio':'#portfolio',
-      'contact':'#contact'
-    };
+  'top':'',
+  'about':'#about',
+  'work':'#work',
+  'education':'#education',
+  'certifications':'#certifications',
+  'projects':'#projects',
+  'contact':'#contact'
+};
     const linkFor = (hash)=> navLinks.find(a=>a.getAttribute('href')===hash);
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
